@@ -1,7 +1,7 @@
 <H3>ENTER YOUR NAME : BALASUBRAMANIAM L</H3>
 <H3>ENTER YOUR REGISTER NO. : 212224240020</H3>
 <H3>EX. NO.1</H3>
-<H3>DATE : 02/02/2026</H3>
+<H3>DATE : </H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,65 +37,59 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
+TYPE YOUR CODE HERE
 ```
-#Import libraries
 import pandas as pd
-import numpy as np
+from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+#Read the dataset from drive
+df = pd.read_csv("Churn_Modelling.csv")
+df.head()
+#Finding Missing Values
+df.isnull().sum()
+#Check for Duplicates
+df.duplicated()
+#Detect Outliers
+num_cols = df.select_dtypes(include='number')
+Q1 = num_cols.quantile(0.25)
+Q3 = num_cols.quantile(0.75)
+IQR = Q3 - Q1
+outliers = (num_cols < (Q1 - 1.5 * IQR)) | (num_cols > (Q3 + 1.5 * IQR))
+outliers.sum()
+#split the dataset into input and output
+X = df[['CreditScore', 'Geography', 'Gender', 'Age',
+        'Tenure', 'Balance', 'NumOfProducts',
+        'HasCrCard', 'IsActiveMember', 'EstimatedSalary']].copy()
 
-data = pd.read_csv("Churn_Modelling.csv")
-print("First 5 rows:\n", data.head())
+y = df['Exited']
 
-print("\nDataset Info:\n")
-print(data.info())
+X.loc[:, 'Gender'] = X['Gender'].map({'Male': 1, 'Female': 0})
 
-print("\nMissing Values:\n")
-print(data.isnull().sum())
+X = pd.get_dummies(X, columns=['Geography'], drop_first=True)
 
-print("\nStatistical Summary:\n")
-print(data.describe())
-
-# RowNumber, CustomerId, and Surname don't help prediction
-data = data.drop(['RowNumber','CustomerId','Surname'], axis=1)
-
-label = LabelEncoder()
-data['Geography'] = label.fit_transform(data['Geography'])
-data['Gender'] = label.fit_transform(data['Gender'])
-
-print("\nAfter Encoding:\n", data.head())
-
-X = data.drop('Exited', axis=1).values   # features
-y = data['Exited'].values                # target
-
-scaler = MinMaxScaler()
-X_scaled = scaler.fit_transform(X)
-print("\nNormalized Features (first 5 rows):\n", X_scaled[:5])
-
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+#splitting the data for training & Testing
 X_train, X_test, y_train, y_test = train_test_split(
-    X_scaled, y, test_size=0.2, random_state=42
+    X, y, test_size=0.2, random_state=0
 )
-
-print("\nTraining set size:", X_train.shape)
-print("Testing set size:", X_test.shape)
+#Print the training data and testing data
+print("\nFinal Training set shape:", X_train.shape)
+print("Final Testing set shape:", X_test.shape)
 ```
-
 ## OUTPUT:
-<img width="700" height="450" alt="Screenshot 2026-02-02 174751" src="https://github.com/user-attachments/assets/8c48dfdb-aca6-4656-98ff-ae838288288d" />
-<br><br>
-<img width="450" height="500" alt="Screenshot 2026-02-02 174801" src="https://github.com/user-attachments/assets/91026444-93e4-4f31-ae7d-505eb8d2b848" />
-<br><br>
-<img width="250" height="350" alt="Screenshot 2026-02-02 174810" src="https://github.com/user-attachments/assets/0646978f-f216-49ec-b473-71792a2374fc" />
-<br><br>
-<img width="750" height="650" alt="Screenshot 2026-02-02 174830" src="https://github.com/user-attachments/assets/eb18fe8f-3331-4140-bb8b-5986d20cabc3" />
-<br><br>
-<img width="700" height="500" alt="Screenshot 2026-02-02 174841" src="https://github.com/user-attachments/assets/57b6b33a-9780-4f4e-b46c-1d8ab0972d0b" />
-<br><br>
-<img width="250" height="60" alt="Screenshot 2026-02-02 174847" src="https://github.com/user-attachments/assets/78a979b9-2d00-4c1b-a368-d9befad99a60" />
+SHOW YOUR OUTPUT HERE
+![alt text](image.png)
 
+![alt text](image-1.png)
 
+![alt text](image-2.png)
 
+![alt text](image-3.png)
+
+![alt text](image-4.png)
 ## RESULT:
 Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
+
 
 
