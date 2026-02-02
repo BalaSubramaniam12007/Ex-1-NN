@@ -79,15 +79,17 @@ print("Final Testing set shape:", X_test.shape)
 ```
 ## OUTPUT:
 SHOW YOUR OUTPUT HERE
-![alt text](image.png)
+<img width="1780" height="293" alt="image" src="https://github.com/user-attachments/assets/2080652d-d30a-4333-842b-e7cc8ae4f0b8" />
 
-![alt text](image-1.png)
 
-![alt text](image-2.png)
+<img width="298" height="461" alt="image" src="https://github.com/user-attachments/assets/d212e58d-c161-4987-a296-9b77798cc290" />
 
-![alt text](image-3.png)
+<img width="327" height="373" alt="image" src="https://github.com/user-attachments/assets/98dce30f-4b2c-4f3c-bfcf-84bb229a5b2b" />
 
-![alt text](image-4.png)
+<img width="314" height="372" alt="image" src="https://github.com/user-attachments/assets/4457bb79-c0a5-4841-8b14-f2aa732c9082" />
+
+<img width="444" height="87" alt="image" src="https://github.com/user-attachments/assets/332d67b4-10e8-4b46-ba2a-262c0dd2a2f1" />
+
 ## RESULT:
 Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
 
